@@ -54,7 +54,7 @@ export default async function Home() {
         <ContactSection Config={Config} />
       </main>
 
-      <MobileStickyActions Config={Config} />
+      {/* <MobileStickyActions Config={Config} /> */}
     </>
   );
 }
