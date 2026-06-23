@@ -1,14 +1,19 @@
-import { Badge } from '@/components/ui/badge'
-import { ButtonLink } from '@/components/ui/button'
-import { Container } from '@/components/ui/container'
+import { ContactProps } from "@/assets/props/PropsConfig";
+import { Badge } from "@/components/ui/badge";
+import { ButtonLink } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
+import { LocalFindById } from "../items/Handle";
+import Image from "next/image";
 
 const trustItems = [
-  'Bác sĩ tận tâm',
-  'Quy trình minh bạch',
-  'Theo dõi sau khám',
-]
+  "Bác sĩ tận tâm",
+  "Quy trình minh bạch",
+  "Theo dõi sau khám",
+];
 
-export function HeroSection() {
+export function HeroSection({ Config }: { Config: Array<any> }) {
+  const ContactData: ContactProps = LocalFindById(Config, "contact");
+
   return (
     <section
       id="trang-chu"
@@ -27,8 +32,8 @@ export function HeroSection() {
             Chăm sóc thú cưng tận tâm tại Sài Gòn
           </h1>
           <p className="type-lead mt-6 max-w-xl">
-            Phòng khám thú y hiện đại, hỗ trợ khám bệnh, tiêm phòng, xét
-            nghiệm, phẫu thuật và tư vấn chăm sóc sau điều trị.
+            Phòng khám thú y hiện đại, hỗ trợ khám bệnh, tiêm phòng, xét nghiệm,
+            phẫu thuật và tư vấn chăm sóc sau điều trị.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <ButtonLink href="#lien-he" size="lg" className="w-full sm:w-auto">
@@ -36,12 +41,12 @@ export function HeroSection() {
               <span aria-hidden="true">→</span>
             </ButtonLink>
             <ButtonLink
-              href="tel:0900000000"
+              href={`tel:${ContactData?.Hotline}`}
               variant="outline"
               size="lg"
               className="w-full sm:w-auto"
             >
-              Gọi ngay: 0900 000 000
+              Gọi ngay: {ContactData?.Hotline} - {ContactData?.PhoneNumber}
             </ButtonLink>
           </div>
 
@@ -72,21 +77,26 @@ export function HeroSection() {
                 </span>
               </div>
 
-              <div className="mx-auto mt-10 grid size-36 place-items-center rounded-full border-[12px] border-surface bg-cyan-soft shadow-card sm:size-44">
-                <div className="text-center">
-                  <span className="block text-5xl" aria-hidden="true">
-                    ♡
-                  </span>
-                  <span className="mt-1 block text-xs font-bold uppercase tracking-widest text-primary-hover">
-                    PawLife
-                  </span>
-                </div>
+              <div className="mx-auto overflow-hidden mt-10 grid size-36 place-items-center rounded-full border-[12px] border-surface bg-cyan-soft shadow-card sm:size-44">
+                <Image
+                  src="https://firebasestorage.googleapis.com/v0/b/thuypawlife.firebasestorage.app/o/avatar%2F08pdzOfERiVTkIUOFXr3arfQjJNVtUphrJhDNohw2oy7xtlj8b.jpg?alt=media&token=e66aad77-9501-4a98-999a-b2df67047a9a"
+                  alt="logo"
+                  width={200}
+                  height={200}
+                  className="w-full h-full bg-cover "
+                />
               </div>
 
               <div className="mt-9 rounded-card border border-primary/10 bg-surface p-4 shadow-card">
                 <div className="flex items-center gap-3">
-                  <span className="grid size-11 shrink-0 place-items-center rounded-full bg-primary text-sm font-bold text-white">
-                    BS
+                  <span className="grid size-11 shrink-0 place-items-center rounded-full border border-primary text-sm font-bold text-white">
+                    <Image
+                      src={ContactData?.LogoWebsite}
+                      alt="logo"
+                      width={200}
+                      height={200}
+                      className="w-20 p-2"
+                    />
                   </span>
                   <span className="min-w-0">
                     <span className="block font-semibold text-foreground">
@@ -114,10 +124,12 @@ export function HeroSection() {
             <p className="text-xs font-semibold uppercase tracking-wider text-muted">
               Sau thăm khám
             </p>
-            <p className="mt-1 font-bold text-primary-hover">Có hướng dẫn theo dõi</p>
+            <p className="mt-1 font-bold text-primary-hover">
+              Có hướng dẫn theo dõi
+            </p>
           </div>
         </div>
       </Container>
     </section>
-  )
+  );
 }

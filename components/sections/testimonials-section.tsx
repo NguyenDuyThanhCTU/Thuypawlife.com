@@ -1,7 +1,7 @@
-import { testimonials } from '@/data/home'
-import { Container } from '@/components/ui/container'
-import { SectionHeading } from '@/components/ui/section-heading'
-import { TestimonialCard } from '@/components/ui/testimonial-card'
+import { testimonials } from "@/data/home";
+import { Container } from "@/components/ui/container";
+import { SectionHeading } from "@/components/ui/section-heading";
+import { TestimonialCard } from "@/components/ui/testimonial-card";
 
 export function TestimonialsSection() {
   return (
@@ -9,8 +9,8 @@ export function TestimonialsSection() {
       <Container>
         <SectionHeading
           eyebrow="Phản hồi"
-          title="Sự an tâm bắt đầu từ trải nghiệm rõ ràng"
-          description="Những chia sẻ gần gũi từ khách hàng đã đưa thú cưng đến PawLife."
+          title="Phản hồi của khách hàng"
+          description="Những chia sẻ và đánh giá từ khách hàng đã đến PawLife."
           align="center"
         />
         <div className="mt-10 grid gap-5 md:grid-cols-3 lg:mt-14">
@@ -19,12 +19,12 @@ export function TestimonialsSection() {
               key={testimonial.author}
               quote={testimonial.quote}
               name={testimonial.author}
-              petName={testimonial.pet}
+              Avt={testimonial.img}
               rating={5}
             />
           ))}
         </div>
       </Container>
     </section>
-  )
+  );
 }

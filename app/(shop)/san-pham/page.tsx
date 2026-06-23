@@ -1,164 +1,168 @@
-import type { Metadata } from 'next'
-import { CTASection } from '@/components/page/cta-section'
-import { FeatureGrid } from '@/components/page/feature-grid'
-import { InfoCard } from '@/components/page/info-card'
-import { PageHero } from '@/components/page/page-hero'
-import { PageSection } from '@/components/page/page-section'
-import { ButtonLink } from '@/components/ui/button'
-import { FAQItem } from '@/components/ui/faq-item'
-import { ServiceCard } from '@/components/ui/service-card'
+import type { Metadata } from "next";
+import { CTASection } from "@/components/page/cta-section";
+import { FeatureGrid } from "@/components/page/feature-grid";
+import { InfoCard } from "@/components/page/info-card";
+import { PageHero } from "@/components/page/page-hero";
+import { PageSection } from "@/components/page/page-section";
+import { ButtonLink } from "@/components/ui/button";
+import { FAQItem } from "@/components/ui/faq-item";
+import { ServiceCard } from "@/components/ui/service-card";
+import { find } from "@/config/lib/api";
+import { ContactProps } from "@/assets/props/PropsConfig";
+import { LocalFindById } from "@/components/items/Handle";
 
 export const metadata: Metadata = {
-  title: 'Dịch vụ chăm sóc thú cưng tại Sài Gòn',
+  title: "Dịch vụ chăm sóc thú cưng tại Sài Gòn",
   description:
-    'Khám tổng quát, tiêm phòng, xét nghiệm, phẫu thuật, spa và tư vấn chăm sóc thú cưng tại Sài Gòn.',
-}
+    "Khám tổng quát, tiêm phòng, xét nghiệm, phẫu thuật, spa và tư vấn chăm sóc thú cưng tại Sài Gòn.",
+};
 
 const services = [
   {
-    title: 'Khám tổng quát',
+    title: "Khám tổng quát",
     description:
-      'Kiểm tra sức khỏe cơ bản và nhận tư vấn chăm sóc phù hợp theo độ tuổi, thể trạng.',
+      "Kiểm tra sức khỏe cơ bản và nhận tư vấn chăm sóc phù hợp theo độ tuổi, thể trạng.",
   },
   {
-    title: 'Tiêm phòng',
+    title: "Tiêm phòng",
     description:
-      'Tư vấn lịch tiêm và các mũi phòng bệnh phù hợp với tình trạng của thú cưng.',
+      "Tư vấn lịch tiêm và các mũi phòng bệnh phù hợp với tình trạng của thú cưng.",
   },
   {
-    title: 'Xét nghiệm',
+    title: "Xét nghiệm",
     description:
-      'Hỗ trợ đánh giá các chỉ số cần thiết theo chỉ định trong quá trình thăm khám.',
+      "Hỗ trợ đánh giá các chỉ số cần thiết theo chỉ định trong quá trình thăm khám.",
   },
   {
-    title: 'Điều trị bệnh thường gặp',
+    title: "Điều trị bệnh thường gặp",
     description:
-      'Thăm khám và tư vấn hướng theo dõi với các dấu hiệu bất thường thường gặp.',
+      "Thăm khám và tư vấn hướng theo dõi với các dấu hiệu bất thường thường gặp.",
   },
   {
-    title: 'Phẫu thuật',
+    title: "Phẫu thuật",
     description:
-      'Tư vấn trước can thiệp, chăm sóc trong quá trình thực hiện và hướng dẫn hậu phẫu.',
+      "Tư vấn trước can thiệp, chăm sóc trong quá trình thực hiện và hướng dẫn hậu phẫu.",
   },
   {
-    title: 'Triệt sản',
+    title: "Triệt sản",
     description:
-      'Đánh giá sức khỏe và hướng dẫn chuẩn bị, chăm sóc thú cưng trước và sau triệt sản.',
+      "Đánh giá sức khỏe và hướng dẫn chuẩn bị, chăm sóc thú cưng trước và sau triệt sản.",
   },
   {
-    title: 'Spa & grooming',
+    title: "Spa & grooming",
     description:
-      'Tắm, vệ sinh và chăm sóc lông giúp thú cưng sạch sẽ, thoải mái hơn mỗi ngày.',
+      "Tắm, vệ sinh và chăm sóc lông giúp thú cưng sạch sẽ, thoải mái hơn mỗi ngày.",
   },
   {
-    title: 'Lưu chuồng',
+    title: "Lưu chuồng",
     description:
-      'Không gian lưu trú ngắn hạn sạch sẽ, có theo dõi và chăm sóc nhu cầu cơ bản.',
+      "Không gian lưu trú ngắn hạn sạch sẽ, có theo dõi và chăm sóc nhu cầu cơ bản.",
   },
   {
-    title: 'Tư vấn dinh dưỡng',
+    title: "Tư vấn dinh dưỡng",
     description:
-      'Gợi ý chế độ ăn phù hợp với độ tuổi, thể trạng và thói quen của từng thú cưng.',
+      "Gợi ý chế độ ăn phù hợp với độ tuổi, thể trạng và thói quen của từng thú cưng.",
   },
-]
+];
 
 const serviceGroups = [
   {
-    icon: '01',
-    title: 'Chăm sóc sức khỏe',
+    icon: "01",
+    title: "Chăm sóc sức khỏe",
     description:
-      'Phù hợp với thú cưng cần kiểm tra sức khỏe định kỳ, phòng bệnh và theo dõi các chỉ số cơ bản.',
-    services: ['Khám tổng quát', 'Tiêm phòng', 'Xét nghiệm'],
+      "Phù hợp với thú cưng cần kiểm tra sức khỏe định kỳ, phòng bệnh và theo dõi các chỉ số cơ bản.",
+    services: ["Khám tổng quát", "Tiêm phòng", "Xét nghiệm"],
   },
   {
-    icon: '02',
-    title: 'Điều trị',
+    icon: "02",
+    title: "Điều trị",
     description:
-      'Hỗ trợ tư vấn và điều trị khi thú cưng có dấu hiệu bất thường, cần can thiệp y tế hoặc theo dõi sau điều trị.',
-    services: [
-      'Điều trị bệnh thường gặp',
-      'Phẫu thuật',
-      'Triệt sản',
-    ],
+      "Hỗ trợ tư vấn và điều trị khi thú cưng có dấu hiệu bất thường, cần can thiệp y tế hoặc theo dõi sau điều trị.",
+    services: ["Điều trị bệnh thường gặp", "Phẫu thuật", "Triệt sản"],
   },
   {
-    icon: '03',
-    title: 'Chăm sóc định kỳ',
+    icon: "03",
+    title: "Chăm sóc định kỳ",
     description:
-      'Phù hợp với nhu cầu chăm sóc thường xuyên, vệ sinh, lưu trú ngắn hạn và xây dựng chế độ ăn hợp lý.',
-    services: ['Spa & grooming', 'Lưu chuồng', 'Tư vấn dinh dưỡng'],
+      "Phù hợp với nhu cầu chăm sóc thường xuyên, vệ sinh, lưu trú ngắn hạn và xây dựng chế độ ăn hợp lý.",
+    services: ["Spa & grooming", "Lưu chuồng", "Tư vấn dinh dưỡng"],
   },
-]
+];
 
 const visitSteps = [
   {
-    title: 'Chọn dịch vụ cần tư vấn',
-    description: 'Xác định nhu cầu hoặc dấu hiệu bạn đang quan tâm.',
+    title: "Chọn dịch vụ cần tư vấn",
+    description: "Xác định nhu cầu hoặc dấu hiệu bạn đang quan tâm.",
   },
   {
-    title: 'Liên hệ hoặc đặt lịch',
-    description: 'Trao đổi sơ bộ để được hướng dẫn thời gian phù hợp.',
+    title: "Liên hệ hoặc đặt lịch",
+    description: "Trao đổi sơ bộ để được hướng dẫn thời gian phù hợp.",
   },
   {
-    title: 'Đưa thú cưng đến phòng khám',
-    description: 'Mang theo thông tin sức khỏe hoặc lịch tiêm nếu có.',
+    title: "Đưa thú cưng đến phòng khám",
+    description: "Mang theo thông tin sức khỏe hoặc lịch tiêm nếu có.",
   },
   {
-    title: 'Nhận tư vấn sau khám',
-    description: 'Theo dõi tại nhà theo hướng dẫn dành cho thú cưng.',
+    title: "Nhận tư vấn sau khám",
+    description: "Theo dõi tại nhà theo hướng dẫn dành cho thú cưng.",
   },
-]
+];
 
 const faqs = [
   {
-    question: 'Nên đặt lịch trước hay có thể đến trực tiếp?',
+    question: "Nên đặt lịch trước hay có thể đến trực tiếp?",
     answer:
-      'Bạn có thể đến trực tiếp, tuy nhiên đặt lịch trước sẽ giúp phòng khám sắp xếp thời gian và hướng dẫn chuẩn bị thuận tiện hơn.',
+      "Bạn có thể đến trực tiếp, tuy nhiên đặt lịch trước sẽ giúp phòng khám sắp xếp thời gian và hướng dẫn chuẩn bị thuận tiện hơn.",
   },
   {
-    question: 'Khi nào nên đưa chó mèo đi khám tổng quát?',
+    question: "Khi nào nên đưa chó mèo đi khám tổng quát?",
     answer:
-      'Nên đưa thú cưng đi khám định kỳ hoặc khi có thay đổi về ăn uống, vận động, hành vi hay xuất hiện dấu hiệu bất thường.',
+      "Nên đưa thú cưng đi khám định kỳ hoặc khi có thay đổi về ăn uống, vận động, hành vi hay xuất hiện dấu hiệu bất thường.",
   },
   {
-    question: 'Tiêm phòng cho thú cưng cần chuẩn bị gì?',
+    question: "Tiêm phòng cho thú cưng cần chuẩn bị gì?",
     answer:
-      'Hãy mang theo sổ tiêm nếu có và thông báo tình trạng sức khỏe gần đây để được tư vấn trước khi tiêm.',
+      "Hãy mang theo sổ tiêm nếu có và thông báo tình trạng sức khỏe gần đây để được tư vấn trước khi tiêm.",
   },
   {
-    question: 'Phòng khám có tư vấn sau điều trị không?',
+    question: "Phòng khám có tư vấn sau điều trị không?",
     answer:
-      'Phòng khám sẽ hướng dẫn cách chăm sóc, theo dõi tại nhà và thời điểm cần tái khám tùy từng trường hợp.',
+      "Phòng khám sẽ hướng dẫn cách chăm sóc, theo dõi tại nhà và thời điểm cần tái khám tùy từng trường hợp.",
   },
   {
-    question: 'Chi phí dịch vụ có được báo trước không?',
+    question: "Chi phí dịch vụ có được báo trước không?",
     answer:
-      'Chi phí dự kiến sẽ được trao đổi sau khi nắm nhu cầu và tình trạng của thú cưng, trước khi thực hiện dịch vụ.',
+      "Chi phí dự kiến sẽ được trao đổi sau khi nắm nhu cầu và tình trạng của thú cưng, trước khi thực hiện dịch vụ.",
   },
   {
-    question: 'Nếu chưa biết chọn dịch vụ nào thì phải làm sao?',
+    question: "Nếu chưa biết chọn dịch vụ nào thì phải làm sao?",
     answer:
-      'Bạn chỉ cần mô tả nhu cầu hoặc dấu hiệu của thú cưng qua điện thoại để được hướng dẫn bước phù hợp.',
+      "Bạn chỉ cần mô tả nhu cầu hoặc dấu hiệu của thú cưng qua điện thoại để được hướng dẫn bước phù hợp.",
   },
-]
+];
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const Config = await find("Config");
+  const ContactData: ContactProps = LocalFindById(Config, "contact");
+  const Products = await find("Products");
+
   return (
     <main>
       <PageHero
         eyebrow="Dịch vụ thú y"
         title="Dịch vụ chăm sóc thú cưng tại Sài Gòn"
         description="Từ khám tổng quát, tiêm phòng, xét nghiệm đến phẫu thuật, spa và tư vấn dinh dưỡng, phòng khám hỗ trợ chăm sóc thú cưng theo từng nhu cầu cụ thể."
-        breadcrumbs={[
-          { label: 'Trang chủ', href: '/' },
-          { label: 'Dịch vụ' },
-        ]}
+        breadcrumbs={[{ label: "Trang chủ", href: "/" }, { label: "Dịch vụ" }]}
         actions={
           <>
             <ButtonLink href="/#lien-he" size="lg">
               Đặt lịch khám
             </ButtonLink>
-            <ButtonLink href="tel:0900000000" variant="outline" size="lg">
+            <ButtonLink
+              href={`tel:${ContactData?.Hotline}`}
+              variant="outline"
+              size="lg"
+            >
               Gọi tư vấn
             </ButtonLink>
           </>
@@ -171,14 +175,11 @@ export default function ServicesPage() {
         description="Lựa chọn dịch vụ phù hợp với tình trạng sức khỏe và nhu cầu chăm sóc hằng ngày của thú cưng."
       >
         <FeatureGrid columns={3}>
-          {services.map((service, index) => (
-            <ServiceCard
-              key={service.title}
-              icon={String(index + 1).padStart(2, '0')}
-              title={service.title}
-              description={service.description}
-              actionLabel="Xem tư vấn phù hợp"
-            />
+          {Products.map((service, index) => (
+            <div key={index}>
+              {" "}
+              <ServiceCard Data={service} Index={index} />
+            </div>
           ))}
         </FeatureGrid>
       </PageSection>
@@ -252,7 +253,11 @@ export default function ServicesPage() {
           </ButtonLink>
         }
         secondaryAction={
-          <ButtonLink href="tel:0900000000" variant="outline" size="lg">
+          <ButtonLink
+            href={`tel:${ContactData?.Hotline}`}
+            variant="outline"
+            size="lg"
+          >
             Gọi ngay
           </ButtonLink>
         }
@@ -276,5 +281,5 @@ export default function ServicesPage() {
         </div>
       </PageSection>
     </main>
-  )
+  );
 }

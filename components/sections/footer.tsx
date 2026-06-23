@@ -1,15 +1,26 @@
-import { navigation } from '@/data/home'
-import { Container } from '@/components/ui/container'
+"use client";
+import { navigation } from "@/data/home";
+import { Container } from "@/components/ui/container";
+import { ContactProps } from "@/assets/props/PropsConfig";
+import { LocalFindById } from "../items/Handle";
+import Image from "next/image";
+import { RevalidateTags } from "@/app/action";
+import Link from "next/link";
 
-export function Footer() {
+export function Footer({ Config }: { Config: Array<any> }) {
+  const ContactData: ContactProps = LocalFindById(Config, "contact");
   return (
     <footer className="bg-foreground text-white">
       <Container className="grid gap-10 py-12 md:grid-cols-3 lg:py-16">
         <div>
           <div className="flex items-center gap-2.5 font-bold">
-            <span className="grid size-10 place-items-center rounded-ui bg-primary text-sm">
-              PL
-            </span>
+            <Image
+              src={ContactData?.LogoWebsite}
+              alt="logo"
+              width={200}
+              height={200}
+              className="w-20 p-2"
+            />
             <span className="text-lg">PawLife</span>
           </div>
           <p className="mt-4 max-w-sm text-sm leading-6 text-white/65">
@@ -35,21 +46,46 @@ export function Footer() {
           <h2 className="font-semibold">Thông tin liên hệ</h2>
           <ul className="mt-4 space-y-3 text-sm text-white/65">
             <li>
-              Hotline:{' '}
-              <a href="tel:0900000000" className="font-semibold text-white hover:text-cyan-soft">
-                0900 000 000
-              </a>
+              Hotline:{" "}
+              <a
+                href={`tel:${ContactData?.Hotline}`}
+                className="font-semibold text-white hover:text-cyan-soft"
+              >
+                {ContactData?.Hotline}
+              </a>{" "}
+              -{" "}
+              <a
+                href={`tel:${ContactData?.PhoneNumber}`}
+                className="font-semibold text-white hover:text-cyan-soft"
+              >
+                {ContactData?.PhoneNumber}
+              </a>{" "}
             </li>
-            <li>Sài Gòn, Việt Nam</li>
-            <li>08:00 - 20:00 mỗi ngày</li>
+            <li>Địa chỉ: {ContactData?.CompanyAddress}</li>
+            <li>Thời gian hoạt động: {ContactData?.CompanyTime}</li>
           </ul>
         </div>
       </Container>
-      <div className="border-t border-white/10">
-        <Container className="py-5 text-sm text-white/55">
-          © 2026 PawLife. Giao diện demo phòng khám thú y.
+      <div
+        className="border-t border-white/10 cursor-pointer"
+        onClick={() => RevalidateTags()}
+      >
+        <Container className="py-5 text-sm text-white text-center">
+          <p className="mb-2">
+            {" "}
+            © Copyright <strong>Thuypawlife.com</strong>. All Rights
+            Reserved{" "}
+          </p>
+          Website được thiết kế bởi{" "}
+          <Link
+            href="https://www.facebook.com/DuyThanhCTU/"
+            className=""
+            target="_blank"
+          >
+            Duy Thanh
+          </Link>
         </Container>
       </div>
     </footer>
-  )
+  );
 }

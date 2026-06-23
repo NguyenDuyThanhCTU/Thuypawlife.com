@@ -1,21 +1,28 @@
-import { navigation } from '@/data/home'
-import { ButtonLink } from '@/components/ui/button'
-import { Container } from '@/components/ui/container'
+import { navigation } from "@/data/home";
+import { ButtonLink } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
+import { ContactProps } from "@/assets/props/PropsConfig";
+import { LocalFindById } from "../items/Handle";
+import Link from "next/link";
+import Image from "next/image";
 
-export function Header() {
+export function Header({ Config }: { Config: Array<any> }) {
+  const ContactData: ContactProps = LocalFindById(Config, "contact");
+
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-surface/95 backdrop-blur">
       <Container className="flex min-h-16 items-center justify-between gap-4 py-3 lg:min-h-20">
-        <a
-          href="#trang-chu"
-          className="flex shrink-0 items-center gap-2.5 font-bold text-foreground"
-          aria-label="PawLife - Trang chủ"
-        >
-          <span className="grid size-10 place-items-center rounded-ui bg-primary text-sm text-white">
-            PL
-          </span>
-          <span className="text-lg">PawLife</span>
-        </a>
+        <div>
+          <Link href={`/`}>
+            <Image
+              src={ContactData?.LogoWebsite}
+              alt="logo"
+              width={200}
+              height={200}
+              className="w-20 p-2"
+            />
+          </Link>
+        </div>
 
         <nav
           className="hidden items-center gap-4 lg:flex xl:gap-7"
@@ -43,5 +50,5 @@ export function Header() {
         </ButtonLink>
       </Container>
     </header>
-  )
+  );
 }

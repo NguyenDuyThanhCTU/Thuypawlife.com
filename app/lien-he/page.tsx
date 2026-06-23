@@ -1,117 +1,120 @@
-import type { Metadata } from 'next'
-import { CTASection } from '@/components/page/cta-section'
-import { PageHero } from '@/components/page/page-hero'
-import { PageSection } from '@/components/page/page-section'
-import { Button, ButtonLink } from '@/components/ui/button'
-import { ContactCard } from '@/components/ui/contact-card'
-import { FAQItem } from '@/components/ui/faq-item'
+import type { Metadata } from "next";
+import { CTASection } from "@/components/page/cta-section";
+import { PageHero } from "@/components/page/page-hero";
+import { PageSection } from "@/components/page/page-section";
+import { Button, ButtonLink } from "@/components/ui/button";
+import { ContactCard } from "@/components/ui/contact-card";
+import { FAQItem } from "@/components/ui/faq-item";
+import { find } from "@/config/lib/api";
+import { LocalFindById } from "@/components/items/Handle";
+import { ContactProps, SocialMediaProps } from "@/assets/props/PropsConfig";
 
 export const metadata: Metadata = {
-  title: 'Liên hệ phòng khám thú y Sài Gòn | Đặt lịch khám thú cưng',
+  title: "Liên hệ phòng khám thú y Sài Gòn | Đặt lịch khám thú cưng",
   description:
-    'Liên hệ phòng khám thú y tại Sài Gòn để đặt lịch khám, gọi tư vấn, nhắn Zalo hoặc xem hướng dẫn chỉ đường trước khi đưa thú cưng đến khám.',
-}
-
-const quickActions = [
-  {
-    icon: '01',
-    title: 'Gọi ngay',
-    value: '0900 000 000',
-    description: 'Trao đổi nhanh về tình trạng của thú cưng.',
-    href: 'tel:0900000000',
-  },
-  {
-    icon: '02',
-    title: 'Nhắn Zalo',
-    value: 'Mở cuộc trò chuyện',
-    description: 'Gửi thông tin để được hướng dẫn trước khi đến.',
-    href: '#',
-  },
-  {
-    icon: '03',
-    title: 'Chỉ đường',
-    value: 'Xem Google Maps',
-    description: 'Kiểm tra hướng di chuyển đến phòng khám.',
-    href: '#',
-  },
-]
-
-const contactInformation = [
-  {
-    icon: 'ĐT',
-    title: 'Hotline',
-    value: '0900 000 000',
-    href: 'tel:0900000000',
-  },
-  {
-    icon: 'ZA',
-    title: 'Zalo',
-    value: '0900 000 000',
-    href: '#',
-  },
-  {
-    icon: 'ĐC',
-    title: 'Địa chỉ',
-    value: 'Sài Gòn, Việt Nam',
-  },
-  {
-    icon: 'EM',
-    title: 'Email',
-    value: 'contact@example.com',
-    href: 'mailto:contact@example.com',
-  },
-]
-
-const serviceAreas = [
-  'Sài Gòn',
-  'TP. Hồ Chí Minh',
-  'Quận trung tâm',
-  'Khu vực lân cận',
-]
-
-const faqs = [
-  {
-    question: 'Tôi có cần đặt lịch trước không?',
-    answer:
-      'Không bắt buộc, nhưng đặt lịch trước giúp phòng khám chủ động sắp xếp thời gian và hướng dẫn bạn chuẩn bị thuận tiện hơn.',
-  },
-  {
-    question:
-      'Nếu thú cưng có dấu hiệu bất thường thì nên gọi hay đến trực tiếp?',
-    answer:
-      'Bạn nên gọi trước và mô tả các dấu hiệu đang có để được hướng dẫn bước chuẩn bị phù hợp trước khi di chuyển.',
-  },
-  {
-    question: 'Phòng khám có tư vấn dịch vụ phù hợp trước khi đến không?',
-    answer:
-      'Có. Bạn có thể mô tả nhu cầu hoặc tình trạng cơ bản của thú cưng để được gợi ý dịch vụ phù hợp.',
-  },
-  {
-    question: 'Giờ làm việc có thay đổi vào ngày lễ không?',
-    answer:
-      'Giờ làm việc có thể thay đổi vào ngày lễ. Vui lòng liên hệ trước khi đến để xác nhận thời gian phù hợp.',
-  },
-  {
-    question: 'Form đặt lịch trên website có gửi thông tin thật chưa?',
-    answer:
-      'Hiện form đặt lịch là giao diện mẫu. Vui lòng gọi hoặc nhắn Zalo nếu cần được hỗ trợ ngay.',
-  },
-]
+    "Liên hệ phòng khám thú y tại Sài Gòn để đặt lịch khám, gọi tư vấn, nhắn Zalo hoặc xem hướng dẫn chỉ đường trước khi đưa thú cưng đến khám.",
+};
 
 const fieldStyles =
-  'mt-2 min-h-12 w-full rounded-ui border border-border bg-surface px-4 text-base text-foreground outline-none transition-colors placeholder:text-muted/70 focus:border-primary focus:ring-4 focus:ring-primary/10'
+  "mt-2 min-h-12 w-full rounded-ui border border-border bg-surface px-4 text-base text-foreground outline-none transition-colors placeholder:text-muted/70 focus:border-primary focus:ring-4 focus:ring-primary/10";
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const Config = await find("Config");
+  const ContactData: ContactProps = LocalFindById(Config, "contact");
+  const SocialMedia: SocialMediaProps = LocalFindById(Config, "SocialMedia");
+
+  const quickActions = [
+    {
+      icon: "01",
+      title: "Gọi ngay",
+      value: `${ContactData?.Hotline}`,
+      description: "Trao đổi nhanh về tình trạng của thú cưng.",
+      href: `tel:${ContactData?.Hotline}`,
+    },
+    {
+      icon: "02",
+      title: "Nhắn Zalo",
+      value: "Mở cuộc trò chuyện",
+      description: "Gửi thông tin để được hướng dẫn trước khi đến.",
+      href: `tel:${SocialMedia?.zalo}`,
+    },
+    {
+      icon: "03",
+      title: "Chỉ đường",
+      value: "Xem Google Maps",
+      description: "Kiểm tra hướng di chuyển đến phòng khám.",
+      href: `tel:${ContactData?.direct}`,
+    },
+  ];
+
+  const contactInformation = [
+    {
+      icon: "ĐT",
+      title: "Hotline",
+      value: `${ContactData?.Hotline} - ${ContactData?.PhoneNumber}`,
+      href: `tel:${ContactData?.Hotline}`,
+    },
+    {
+      icon: "ZA",
+      title: "Zalo",
+      value: "Kết nối ngay",
+      href: `tel:${SocialMedia?.zalo}`,
+    },
+    {
+      icon: "ĐC",
+      title: "Địa chỉ",
+      value: `${ContactData?.CompanyAddress}`,
+    },
+    {
+      icon: "EM",
+      title: "Email",
+      value: `${ContactData?.Email}`,
+      href: `mailto${ContactData?.Email}`,
+    },
+  ];
+
+  const serviceAreas = [
+    "Sài Gòn",
+    "TP. Hồ Chí Minh",
+    "Quận trung tâm",
+    "Khu vực lân cận",
+  ];
+
+  const faqs = [
+    {
+      question: "Tôi có cần đặt lịch trước không?",
+      answer:
+        "Không bắt buộc, nhưng đặt lịch trước giúp phòng khám chủ động sắp xếp thời gian và hướng dẫn bạn chuẩn bị thuận tiện hơn.",
+    },
+    {
+      question:
+        "Nếu thú cưng có dấu hiệu bất thường thì nên gọi hay đến trực tiếp?",
+      answer:
+        "Bạn nên gọi trước và mô tả các dấu hiệu đang có để được hướng dẫn bước chuẩn bị phù hợp trước khi di chuyển.",
+    },
+    {
+      question: "Phòng khám có tư vấn dịch vụ phù hợp trước khi đến không?",
+      answer:
+        "Có. Bạn có thể mô tả nhu cầu hoặc tình trạng cơ bản của thú cưng để được gợi ý dịch vụ phù hợp.",
+    },
+    {
+      question: "Giờ làm việc có thay đổi vào ngày lễ không?",
+      answer:
+        "Giờ làm việc có thể thay đổi vào ngày lễ. Vui lòng liên hệ trước khi đến để xác nhận thời gian phù hợp.",
+    },
+    {
+      question: "Form đặt lịch trên website có gửi thông tin thật chưa?",
+      answer:
+        "Hiện form đặt lịch là giao diện mẫu. Vui lòng gọi hoặc nhắn Zalo nếu cần được hỗ trợ ngay.",
+    },
+  ];
   return (
     <main>
       <PageHero
         eyebrow="Liên hệ phòng khám"
         title="Đặt lịch và nhận tư vấn cho thú cưng của bạn"
         description="Bạn có thể gọi ngay, nhắn Zalo hoặc gửi yêu cầu đặt lịch để được tư vấn dịch vụ phù hợp trước khi đưa thú cưng đến phòng khám."
-        breadcrumbs={[
-          { label: 'Trang chủ', href: '/' },
-          { label: 'Liên hệ' },
-        ]}
+        breadcrumbs={[{ label: "Trang chủ", href: "/" }, { label: "Liên hệ" }]}
         actions={
           <>
             <ButtonLink href="tel:0900000000" size="lg">
@@ -244,10 +247,14 @@ export default function ContactPage() {
             <h3 className="mt-5 text-xl font-semibold text-foreground">
               Giờ làm việc
             </h3>
+            <p className="text-red-700">
+              <strong>Cấp cứu 24/7</strong>
+            </p>
             <div className="mt-5 flex items-center justify-between gap-4 border-b border-border/80 pb-4">
               <span className="text-sm text-muted">Thứ 2 - Chủ nhật</span>
               <strong className="text-primary-hover">08:00 - 20:00</strong>
             </div>
+
             <p className="mt-4 text-sm leading-7 text-muted">
               Giờ làm việc có thể thay đổi vào ngày lễ. Vui lòng liên hệ trước
               khi đến.
@@ -265,7 +272,7 @@ export default function ContactPage() {
               Phòng khám hỗ trợ khách hàng tại Sài Gòn và các khu vực lân cận.
               Nếu bạn ở xa, hãy liên hệ trước để được tư vấn thời gian phù hợp.
             </p>
-            <ul className="mt-5 flex flex-wrap gap-2">
+            {/* <ul className="mt-5 flex flex-wrap gap-2">
               {serviceAreas.map((area) => (
                 <li
                   key={area}
@@ -274,7 +281,7 @@ export default function ContactPage() {
                   {area}
                 </li>
               ))}
-            </ul>
+            </ul> */}
           </article>
         </div>
       </PageSection>
@@ -300,7 +307,7 @@ export default function ContactPage() {
         title="Bạn cần tư vấn nhanh cho thú cưng?"
         description="Gọi hoặc nhắn Zalo để được hướng dẫn trước khi đưa thú cưng đến phòng khám."
         primaryAction={
-          <ButtonLink href="tel:0900000000" size="lg">
+          <ButtonLink href={`tel:${ContactData?.Hotline}`} size="lg">
             Gọi ngay
           </ButtonLink>
         }
@@ -311,5 +318,5 @@ export default function ContactPage() {
         }
       />
     </main>
-  )
+  );
 }
