@@ -84,9 +84,9 @@ export default async function NewsPage() {
         breadcrumbs={[{ label: "Trang chủ", href: "/" }, { label: "Tin tức" }]}
         actions={
           <>
-            <ButtonLink href="/lien-he" size="lg">
+            {/* <ButtonLink href="/lien-he" size="lg">
               Đặt lịch khám
-            </ButtonLink>
+            </ButtonLink> */}
             <ButtonLink href="/san-pham" variant="outline" size="lg">
               Xem dịch vụ thú y
             </ButtonLink>
@@ -195,11 +195,11 @@ export default async function NewsPage() {
         className="pt-12 sm:pt-16 lg:pt-20"
         title="Thú cưng có dấu hiệu bất thường?"
         description="Thông tin trong bài viết chỉ mang tính tham khảo. Nếu thú cưng có biểu hiện lạ, hãy liên hệ phòng khám để được tư vấn phù hợp."
-        primaryAction={
-          <ButtonLink href="/lien-he" size="lg">
-            Đặt lịch khám
-          </ButtonLink>
-        }
+        // primaryAction={
+        //   <ButtonLink href="/lien-he" size="lg">
+        //     Đặt lịch khám
+        //   </ButtonLink>
+        // }
         secondaryAction={
           <ButtonLink href="/san-pham" variant="outline" size="lg">
             Xem dịch vụ

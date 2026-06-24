@@ -36,17 +36,21 @@ export function HeroSection({ Config }: { Config: Array<any> }) {
             phẫu thuật và tư vấn chăm sóc sau điều trị.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href="#lien-he" size="lg" className="w-full sm:w-auto">
+            <ButtonLink
+              href={`tel:${ContactData?.Hotline}`}
+              size="lg"
+              className="w-full sm:w-auto"
+            >
               Đặt lịch khám
               <span aria-hidden="true">→</span>
             </ButtonLink>
             <ButtonLink
-              href={`tel:${ContactData?.Hotline}`}
+              href={`tel:${ContactData?.PhoneNumber}`}
               variant="outline"
               size="lg"
               className="w-full sm:w-auto"
             >
-              Gọi ngay: {ContactData?.Hotline} - {ContactData?.PhoneNumber}
+              Gọi ngay: {ContactData?.PhoneNumber}
             </ButtonLink>
           </div>
 

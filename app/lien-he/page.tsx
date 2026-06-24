@@ -120,9 +120,9 @@ export default async function ContactPage() {
             <ButtonLink href="tel:0900000000" size="lg">
               Gọi ngay
             </ButtonLink>
-            <ButtonLink href="#dat-lich" variant="outline" size="lg">
+            {/* <ButtonLink href="#dat-lich" variant="outline" size="lg">
               Đặt lịch khám
-            </ButtonLink>
+            </ButtonLink> */}
           </>
         }
       />

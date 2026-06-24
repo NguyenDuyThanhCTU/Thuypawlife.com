@@ -46,14 +46,14 @@ export function Header({ Config }: { Config: Array<any> }) {
 
         <div className="flex items-center gap-2">
           <ButtonLink
-            href="#lien-he"
+            href={`tel:${ContactData?.Hotline}`}
             size="sm"
             className="shrink-0 px-3 sm:px-4"
-            aria-label="Đặt lịch khám"
+            aria-label="Liên hệ ngay"
             onClick={() => setIsMenuOpen(false)}
           >
-            <span className="sm:hidden">Đặt lịch</span>
-            <span className="hidden sm:inline">Đặt lịch khám</span>
+            <span className="sm:hidden">Liên hệ ngay</span>
+            <span className="hidden sm:inline">Liên hệ ngay</span>
           </ButtonLink>
 
           <button
@@ -118,16 +118,6 @@ export function Header({ Config }: { Config: Array<any> }) {
           </nav>
 
           <div className="mt-4 border-t border-border/70 pt-4">
-            <ButtonLink
-              href="#lien-he"
-              size="lg"
-              className="w-full"
-              aria-label="Đặt lịch khám"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Đặt lịch khám
-            </ButtonLink>
-
             {ContactData?.Hotline ? (
               <a
                 href={`tel:${ContactData.Hotline}`}
@@ -135,6 +125,15 @@ export function Header({ Config }: { Config: Array<any> }) {
                 className="mt-3 flex min-h-12 items-center justify-center rounded-ui border border-primary/20 bg-white px-4 text-sm font-semibold text-primary transition hover:bg-primary-subtle"
               >
                 Gọi ngay: {ContactData.Hotline}
+              </a>
+            ) : null}
+            {ContactData?.PhoneNumber ? (
+              <a
+                href={`tel:${ContactData.PhoneNumber}`}
+                onClick={() => setIsMenuOpen(false)}
+                className="mt-3 flex min-h-12 items-center justify-center rounded-ui border border-primary/20 bg-white px-4 text-sm font-semibold text-primary transition hover:bg-primary-subtle"
+              >
+                Gọi ngay: {ContactData.PhoneNumber}
               </a>
             ) : null}
           </div>

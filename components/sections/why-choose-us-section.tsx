@@ -1,47 +1,47 @@
-import { FeatureGrid } from '@/components/page/feature-grid'
-import { InfoCard } from '@/components/page/info-card'
-import { ButtonLink } from '@/components/ui/button'
-import { Container } from '@/components/ui/container'
-import { SectionHeading } from '@/components/ui/section-heading'
+import { FeatureGrid } from "@/components/page/feature-grid";
+import { InfoCard } from "@/components/page/info-card";
+import { ButtonLink } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
+import { SectionHeading } from "@/components/ui/section-heading";
 
 const reasons = [
   {
-    title: 'Cam kết chăm sóc',
+    title: "Cam kết chăm sóc",
     description:
-      'Lắng nghe tình trạng của thú cưng, tư vấn hướng xử lý phù hợp và giải thích rõ từng bước.',
+      "Lắng nghe tình trạng của thú cưng, tư vấn hướng xử lý phù hợp và giải thích rõ từng bước.",
   },
   {
-    title: 'Điểm khác biệt',
+    title: "Điểm khác biệt",
     description:
-      'Tập trung vào sự rõ ràng, dễ hiểu và hạn chế làm khách hàng bị rối bởi quá nhiều thuật ngữ chuyên môn.',
+      "Tập trung vào sự rõ ràng, dễ hiểu và hạn chế làm khách hàng bị rối bởi quá nhiều thuật ngữ chuyên môn.",
   },
   {
-    title: 'Không gian sạch sẽ',
+    title: "Không gian sạch sẽ",
     description:
-      'Khu vực khám được sắp xếp gọn gàng, tạo cảm giác an tâm cho chủ nuôi và thú cưng.',
+      "Khu vực khám được sắp xếp gọn gàng, tạo cảm giác an tâm cho chủ nuôi và thú cưng.",
   },
   {
-    title: 'Đội ngũ bác sĩ',
+    title: "Đội ngũ bác sĩ",
     description:
-      'Bác sĩ tư vấn theo tình trạng thực tế của thú cưng, ưu tiên giải pháp phù hợp và dễ theo dõi.',
+      "Bác sĩ tư vấn theo tình trạng thực tế của thú cưng, ưu tiên giải pháp phù hợp và dễ theo dõi.",
   },
   {
-    title: 'Quy trình minh bạch',
+    title: "Quy trình minh bạch",
     description:
-      'Các bước khám, tư vấn và chi phí dự kiến được trao đổi rõ trước khi thực hiện.',
+      "Các bước khám, tư vấn và chi phí dự kiến được trao đổi rõ trước khi thực hiện.",
   },
   {
-    title: 'Tư vấn sau khám',
+    title: "Tư vấn sau khám",
     description:
-      'Chủ nuôi được hướng dẫn theo dõi tại nhà và nhận biết các dấu hiệu cần tái khám.',
+      "Chủ nuôi được hướng dẫn theo dõi tại nhà và nhận biết các dấu hiệu cần tái khám.",
   },
-]
+];
 
 const trustHighlights = [
-  'Quy trình khám rõ ràng',
-  'Tư vấn dễ hiểu',
-  'Theo dõi sau điều trị',
-]
+  "Quy trình khám rõ ràng",
+  "Tư vấn dễ hiểu",
+  "Theo dõi sau điều trị",
+];
 
 export function WhyChooseUsSection() {
   return (
@@ -61,7 +61,7 @@ export function WhyChooseUsSection() {
           {reasons.map((reason, index) => (
             <InfoCard
               key={reason.title}
-              icon={String(index + 1).padStart(2, '0')}
+              icon={String(index + 1).padStart(2, "0")}
               title={reason.title}
               description={reason.description}
               className="border-primary/10"
@@ -91,12 +91,12 @@ export function WhyChooseUsSection() {
             <p className="font-semibold text-foreground">
               Bạn muốn được tư vấn trước khi đưa thú cưng đến khám?
             </p>
-            <ButtonLink href="/#lien-he" className="shrink-0">
+            {/* <ButtonLink href="/#lien-he" className="shrink-0">
               Đặt lịch khám
-            </ButtonLink>
+            </ButtonLink> */}
           </div>
         </div>
       </Container>
     </section>
-  )
+  );
 }

@@ -44,14 +44,22 @@ export default async function Home() {
       <main>
         <HomeSlide Data={Slides} />
         <HeroSection Config={Config} />
+
         <ServicesSection Products={Products} />
+        <div className="">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3917.2766503063112!2d106.7352112!3d10.942462500000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d96fbf00f9ad%3A0x64c14696842699e9!2zUGjDsm5nIEtow6FtIFRow7ogWSBQYXdMaWZl!5e0!3m2!1sen!2s!4v1782264725588!5m2!1sen!2s"
+            loading="lazy"
+            className="w-full h-[50vh]"
+          ></iframe>
+        </div>
         <PetRecoveryGallery Collections={Collections} />
         <WhyChooseUsSection />
         <ProcessSection />
         <DoctorsSection />
         <TestimonialsSection />
         <FAQSection />
-        <ContactSection Config={Config} />
+        {/* <ContactSection Config={Config} /> */}
       </main>
 
       {/* <MobileStickyActions Config={Config} /> */}

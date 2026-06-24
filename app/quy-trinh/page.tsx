@@ -113,10 +113,10 @@ export default async function ProcessPage() {
         ]}
         actions={
           <>
-            <ButtonLink href="/#lien-he" size="lg">
+            {/* <ButtonLink href="/#lien-he" size="lg">
               Đặt lịch khám
-            </ButtonLink>
-            <ButtonLink href="tel:0900000000" variant="outline" size="lg">
+            </ButtonLink> */}
+            <ButtonLink href={ContactData?.Hotline} variant="outline" size="lg">
               Gọi tư vấn
             </ButtonLink>
           </>
@@ -216,11 +216,11 @@ export default async function ProcessPage() {
         className="pt-12 sm:pt-16 lg:pt-20"
         title="Bạn muốn được hướng dẫn trước khi đưa thú cưng đi khám?"
         description="Liên hệ phòng khám để được tư vấn bước chuẩn bị phù hợp với tình trạng của thú cưng."
-        primaryAction={
-          <ButtonLink href="/#lien-he" size="lg">
-            Đặt lịch khám
-          </ButtonLink>
-        }
+        // primaryAction={
+        //   <ButtonLink href="/#lien-he" size="lg">
+        //     Đặt lịch khám
+        //   </ButtonLink>
+        // }
         secondaryAction={
           <ButtonLink
             href={`tel:${ContactData?.Hotline}`}

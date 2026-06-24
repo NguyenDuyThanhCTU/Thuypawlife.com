@@ -137,9 +137,9 @@ export default async function AboutPage() {
         ]}
         actions={
           <>
-            <ButtonLink href="/#lien-he" size="lg">
+            {/* <ButtonLink href="/#lien-he" size="lg">
               Đặt lịch khám
-            </ButtonLink>
+            </ButtonLink> */}
             <ButtonLink href="/quy-trinh" variant="outline" size="lg">
               Xem quy trình khám
             </ButtonLink>
@@ -308,11 +308,11 @@ export default async function AboutPage() {
         className="pt-12 sm:pt-16 lg:pt-20"
         title="Bạn muốn được tư vấn trước khi đưa thú cưng đến khám?"
         description="Liên hệ phòng khám để được gợi ý dịch vụ phù hợp và chuẩn bị tốt hơn cho buổi thăm khám."
-        primaryAction={
-          <ButtonLink href="/#lien-he" size="lg">
-            Đặt lịch khám
-          </ButtonLink>
-        }
+        // primaryAction={
+        //   <ButtonLink href="/#lien-he" size="lg">
+        //     Đặt lịch khám
+        //   </ButtonLink>
+        // }
         secondaryAction={
           <ButtonLink
             href={`tel:${ContactData?.Hotline}`}

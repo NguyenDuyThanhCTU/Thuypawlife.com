@@ -49,7 +49,7 @@ export default function FloatingButtons({ Config }: { Config: Array<any> }) {
   return (
     <>
       {/* 1. Nút Liên Hệ Đặt Phòng (Giữ nguyên bên trái) */}
-      <div className="fixed bottom-6 left-6 z-50 flex flex-col items-start gap-2">
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-start gap-2">
         <div className="bg-white text-slate-800 text-xs font-bold px-4 py-2 rounded-lg shadow-lg relative animate-bounce ml-2 border border-gray-100">
           Bạn cần hỗ trợ?
           <div className="absolute -bottom-1 left-4 w-3 h-3 bg-white border-b border-r border-gray-100 transform rotate-45"></div>
@@ -73,7 +73,7 @@ export default function FloatingButtons({ Config }: { Config: Array<any> }) {
       </div>
 
       {/* 2. Cụm nút bên phải (Socials + ScrollTop) */}
-      <div className="fixed bottom-6 right-6 z-40 flex flex-col items-center gap-3">
+      <div className="fixed bottom-32 right-6 z-40 flex flex-col items-center gap-3">
         {/* Danh sách Social Buttons */}
         <div className="flex flex-col gap-3 pb-2">
           {socialLinks.map((item) => (

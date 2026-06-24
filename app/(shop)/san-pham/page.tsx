@@ -155,9 +155,9 @@ export default async function ServicesPage() {
         breadcrumbs={[{ label: "Trang chủ", href: "/" }, { label: "Dịch vụ" }]}
         actions={
           <>
-            <ButtonLink href="/#lien-he" size="lg">
+            {/* <ButtonLink href="/#lien-he" size="lg">
               Đặt lịch khám
-            </ButtonLink>
+            </ButtonLink> */}
             <ButtonLink
               href={`tel:${ContactData?.Hotline}`}
               variant="outline"
@@ -247,11 +247,11 @@ export default async function ServicesPage() {
       <CTASection
         title="Chưa biết thú cưng cần dịch vụ nào?"
         description="Liên hệ phòng khám để được tư vấn dịch vụ phù hợp trước khi đưa thú cưng đến khám."
-        primaryAction={
-          <ButtonLink href="/#lien-he" size="lg">
-            Đặt lịch khám
-          </ButtonLink>
-        }
+        // primaryAction={
+        //   <ButtonLink href="/#lien-he" size="lg">
+        //     Đặt lịch khám
+        //   </ButtonLink>
+        // }
         secondaryAction={
           <ButtonLink
             href={`tel:${ContactData?.Hotline}`}
